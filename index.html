@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#123d30">
+<title>JoyaGoo spreadsheet — Product Finds & Buying Checklist</title>
+<meta name="description" content="Explore JoyaGoo spreadsheet finds with real HipobuyFind catalog photos, reference prices, searchable categories and a practical buying and shipping checklist.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JoyaGoo spreadsheet — Find your next everyday favorite">
+<meta property="og:description" content="Browse real catalog finds, compare reference prices and plan your order with a clear buying checklist.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<!--
+File: index.html
+Research references:
+https://joyagoospreadsheet.com/joyagoo-spreadsheet
+https://www.joyagoo.net/
+Catalog source: https://hipobuyfind.com/
+Catalog snapshot: 2026-11-19. Prices are references, not live offers.
+Improvements applied: static readable product cards, source IDs, working local
+filters, explicit destination disclosure, descriptive image alternatives,
+cost planning and practical questions without invented reviews or sales.
+Search results vary by location and time; Google first-page placement was not verified.
+Deployment requires the final public URL before adding a self-referencing
+canonical, absolute og:url and sitemap.
+Google/Bing submission has NOT been performed: no deployed URL or verified
+Search Console/Bing Webmaster Tools property was provided.
+After deployment, verify ownership, submit the sitemap in both webmaster tools,
+and request indexing through the available URL inspection features.
+HTML alone cannot submit a website or guarantee indexing.
+-->
+<style>
+:root{--bg:#f5f6f0;--paper:#fff;--ink:#173b30;--muted:#65736b;--line:#dce3d9;--green:#164b38;--lime:#d9ef96;--radius:20px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+button,a,input,select{touch-action:manipulation}
+:focus-visible{outline:3px solid #83a936;outline-offset:4px}
+.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+.top{border-bottom:1px solid var(--line);background:#fff}
+.nav{min-height:84px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:-.6px}
+.mark{display:grid;place-items:center;width:42px;height:42px;background:var(--green);color:var(--lime);border-radius:13px;font-size:23px}
+.brand small{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.nav-note{font-size:12px;color:var(--muted)}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;padding:13px 22px;border-radius:100px;background:var(--green);color:white;font-weight:750;border:1px solid transparent;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.light{background:var(--lime);color:var(--ink)}
+.btn.outline{background:transparent;border-color:#ffffff65;color:white}
+.hero{padding:60px 0 40px}
+.hero-panel{background:var(--green);color:#fff;border-radius:30px;padding:64px;position:relative;overflow:hidden;display:grid;grid-template-columns:1.4fr .7fr;gap:48px;align-items:center}
+.hero-panel:before{content:"";position:absolute;width:450px;height:450px;border:1px solid #ffffff13;border-radius:50%;right:-220px;top:-250px;pointer-events:none}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#c5ddae}
+h1{font-size:clamp(38px,5.6vw,66px);line-height:1.06;letter-spacing:-2.6px;margin:20px 0}
+h1 span{color:var(--lime)}
+.hero p{color:#dae7dd;max-width:580px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.hero .disclosure{font-size:12px;color:#bbd1c3;margin-top:20px}
+.note-card{background:#f1f4e9;color:var(--ink);padding:28px;border-radius:22px;transform:rotate(3deg);box-shadow:0 15px 40px #09261835}
+.note-card strong{font-size:24px;line-height:1.25;display:block;margin:12px 0 20px}
+.note-line{display:flex;justify-content:space-between;border-top:1px solid #d3ddcc;padding:11px 0;font-size:13px}
+.note-card .tag{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800}
+.note-card p{color:var(--muted);font-size:12px;margin-bottom:0}
+.intro{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:26px 0 58px}
+.intro div{padding:0 20px;border-left:1px solid #cdd8c8}
+.intro strong{display:block;font-size:15px}
+.intro span{font-size:13px;color:var(--muted)}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:22px;margin-bottom:24px}
+.kicker{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#60804c}
+h2{font-size:clamp(27px,3vw,36px);line-height:1.2;letter-spacing:-1px;margin:9px 0 12px}
+.section-head p,.subtext{color:var(--muted);font-size:14px;margin:0;max-width:650px}
+.source{font-size:12px;color:var(--muted);white-space:nowrap}
+.toolbar{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:18px;background:white;border:1px solid var(--line);border-radius:17px;margin-bottom:20px}
+.search{flex:1;min-width:200px}
+.search input{width:100%;border:1px solid var(--line);background:#f8f9f5;border-radius:10px;padding:12px}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filter{border:0;background:#f0f3eb;padding:10px 14px;cursor:pointer;border-radius:9px;font-size:13px;color:var(--ink)}
+.filter[aria-pressed="true"]{background:var(--green);color:#fff}
+.sort{border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px;font-size:13px;max-width:100%}
+.results{font-size:12px;color:var(--muted);margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.product{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+.product[hidden]{display:none}
+.photo{display:block;position:relative;background:#edf0e8;aspect-ratio:1.16;overflow:hidden}
+.photo img{display:block;width:100%;height:100%;object-fit:contain;transition:transform .35s}
+.photo:hover img{transform:scale(1.04)}
+.photo .badge{position:absolute;top:13px;left:13px;background:#ffffffed;padding:4px 10px;border-radius:100px;font-size:10px;font-weight:750}
+.image-error{display:none;height:100%;place-items:center;color:var(--muted);font-size:13px}
+.product-body{padding:20px;display:flex;flex:1;flex-direction:column}
+.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;gap:8px}
+h3{font-size:17px;line-height:1.4;margin:10px 0 16px}
+.price-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto}
+.price{font-size:23px;font-weight:800;letter-spacing:-.6px}
+.price small{font-size:11px;font-weight:450;color:var(--muted);display:block;letter-spacing:0}
+.open{font-size:12px;font-weight:750;border-bottom:1px solid #8fa38c;padding-bottom:3px}
+.empty{padding:30px;text-align:center;border:1px dashed var(--line);border-radius:15px}
+.catalog-foot{font-size:12px;color:var(--muted);margin:20px 0}
+.guide{margin:66px 0;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px}
+.panel h2{font-size:29px}
+.steps{list-style:none;padding:0;counter-reset:step;margin:25px 0 0}
+.steps li{position:relative;padding:0 0 23px 43px;counter-increment:step}
+.steps li:before{content:counter(step,decimal-leading-zero);position:absolute;left:0;top:0;font-size:12px;color:#648141;font-weight:800;background:#eef3e4;padding:4px 7px;border-radius:7px}
+.steps strong{display:block;font-size:15px}
+.steps p{font-size:13px;color:var(--muted);margin:5px 0 0}
+.budget{background:#eaf0dd}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:24px 0}
+.fields label{font-size:12px;color:#456044}
+.fields input{width:100%;padding:11px;border:1px solid #c6d4b6;border-radius:9px;background:#ffffffc9;margin-top:5px;color:var(--ink)}
+.total{border-top:1px solid #cbd7bd;padding-top:20px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.total output{font-size:34px;font-weight:850;letter-spacing:-1px}
+.fine{font-size:12px;color:var(--muted)}
+.explain{padding:0 0 54px;max-width:850px}
+.explain p{font-size:15px;color:var(--muted)}
+.checks{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:25px 0}
+.checks div{border-top:2px solid #b5ca91;padding-top:14px}
+.checks h3{margin:0 0 8px;font-size:15px}
+.checks p{font-size:13px;margin:0}
+.faq{max-width:850px;margin:0 auto 60px}
+details{border-bottom:1px solid var(--line);padding:19px 0}
+summary{font-weight:700;cursor:pointer;padding-right:20px}
+details p{color:var(--muted);font-size:14px;margin-bottom:4px}
+.cta{text-align:center;background:var(--green);padding:42px;border-radius:24px;color:#fff;margin-bottom:55px}
+.cta p{color:#d4e4d5;font-size:14px}
+footer{border-top:1px solid var(--line);padding:28px 0 35px;font-size:12px;color:var(--muted)}
+.footer-row{display:flex;justify-content:space-between;gap:25px}
+footer p{max-width:720px;margin:8px 0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+@media(max-width:900px){.hero-panel{padding:40px;grid-template-columns:1fr}.note-card{display:none}.grid{grid-template-columns:repeat(2,1fr)}.guide{grid-template-columns:1fr}.source{white-space:normal}.section-head{align-items:start}}
+@media(max-width:580px){.wrap{width:calc(100% - 28px)}.nav{min-height:74px}.nav-note{display:none}.nav>.btn{font-size:12px;padding:10px 15px}.brand{font-size:14px}.hero{padding-top:24px}.hero-panel{padding:29px 23px;border-radius:22px}h1{letter-spacing:-1.6px}.intro{grid-template-columns:1fr;gap:16px;margin-bottom:40px}.section-head{display:block}.source{margin-top:14px;display:block}.toolbar{padding:12px}.search{flex-basis:100%}.grid{gap:12px}.product-body{padding:13px}h3{font-size:14px}.meta{font-size:10px;flex-wrap:wrap}.price{font-size:20px}.price-row{align-items:start;flex-direction:column}.photo .badge{font-size:9px;top:8px;left:8px}.panel{padding:23px}.checks{grid-template-columns:1fr}.footer-row{display:block}.cta{padding:29px 20px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "name":"JoyaGoo spreadsheet — Product Finds & Buying Checklist",
+  "description":"An independent product discovery page featuring a HipobuyFind catalog snapshot and practical order planning guidance.",
+  "inLanguage":"en",
+  "about":{"@type":"Thing","name":"JoyaGoo spreadsheet"},
+  "mainEntity":{
+    "@type":"ItemList",
+    "name":"Selected HipobuyFind catalog products",
+    "numberOfItems":6,
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Black and Red Basketball Sneakers"},
+      {"@type":"ListItem","position":2,"name":"Cream Chunky Sneakers with Wide Laces"},
+      {"@type":"ListItem","position":3,"name":"Fear of God Essentials Oversized Hoodie Seafam"},
+      {"@type":"ListItem","position":4,"name":"Fear of God Essentials Hoodie"},
+      {"@type":"ListItem","position":5,"name":"Trapstar T-Shirt"},
+      {"@type":"ListItem","position":6,"name":"Beige Quilted Drawstring Mini Backpack, Style 6302-1"}
+    ]
+  }
+}
+</script>
+<link rel="canonical" href="https://kakobuyfinds.github.io/bnlvz/">
+</head>
+<body>
+<header class="top">
+  <div class="wrap nav">
+    <a class="brand" href="https://hipobuyfind.com" aria-label="JoyaGoo spreadsheet — opens HipobuyFind">
+      <span class="mark" aria-hidden="true">J.</span>
+      <span>JoyaGoo spreadsheet<small>Independent finds guide</small></span>
+    </a>
+    <span class="nav-note">Discover thoughtfully. Check before buying.</span>
+    <a class="btn" href="https://hipobuyfind.com">Open catalog ↗</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" aria-labelledby="page-title">
+    <div class="hero-panel">
+      <div>
+        <div class="eyebrow">The everyday finds edit</div>
+        <h1 id="page-title">JoyaGoo spreadsheet<span>.<br>Find your next favorite.</span></h1>
+        <p>A focused starting point for shoes, clothing and accessories. Explore real HipobuyFind catalog entries, compare reference prices and keep the details that matter before placing an order.</p>
+        <div class="actions">
+          <a class="btn light" href="https://hipobuyfind.com">JoyaGoo spreadsheet ↗</a>
+          <a class="btn outline" href="https://hipobuyfind.com">Buy it now ↗</a>
+        </div>
+        <p class="disclosure">Both buttons open HipobuyFind. This independent guide is not an official JoyaGoo website, and checkout does not take place here.</p>
+      </div>
+      <aside class="note-card" aria-label="Before you order">
+        <span class="tag">Your shortlist starts here</span>
+        <strong>Good finds.<br>Clearer decisions.</strong>
+        <div class="note-line"><span>01 / Discover</span><b>Find the style</b></div>
+        <div class="note-line"><span>02 / Compare</span><b>Check the details</b></div>
+        <div class="note-line"><span>03 / Plan</span><b>Budget delivery</b></div>
+        <p>A catalog price is only one part of the total cost.</p>
+      </aside>
+    </div>
+  </section>
+
+  <div class="intro" aria-label="Catalog features">
+    <div><strong>Real catalog references</strong><span>Source photos, item IDs and listed CNY prices.</span></div>
+    <div><strong>A useful, smaller selection</strong><span>Search and filter the six imported entries below.</span></div>
+    <div><strong>Details before decisions</strong><span>Check size, seller terms and shipping separately.</span></div>
+  </div>
+
+  <section aria-labelledby="catalog-title">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Browse the edit / 01</div>
+        <h2 id="catalog-title">The product directory</h2>
+        <p>A selected snapshot from HipobuyFind. Product names describe the source listings; brand names do not establish authenticity or authorization.</p>
+      </div>
+      <span class="source">Source: HipobuyFind<br>Snapshot: November 19, 2026</span>
+    </div>
+
+    <div class="toolbar">
+      <label class="search"><span class="sr-only">Search this product selection by name or item ID</span><input id="search" type="search" placeholder="Search a style or item ID…" autocomplete="off"></label>
+      <div class="filters" role="group" aria-label="Filter products by category">
+        <button class="filter" type="button" data-category="all" aria-pressed="true">All</button>
+        <button class="filter" type="button" data-category="shoes" aria-pressed="false">Shoes</button>
+        <button class="filter" type="button" data-category="clothing" aria-pressed="false">Clothing</button>
+        <button class="filter" type="button" data-category="bags" aria-pressed="false">Bags</button>
+      </div>
+      <label><span class="sr-only">Sort products</span><select id="sort" class="sort"><option value="default">Featured order</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></label>
+    </div>
+    <p id="results" class="results" aria-live="polite">6 source catalog entries · CNY reference prices</p>
+
+    <div class="grid" id="products">
+      <article class="product" data-category="shoes" data-price="145" data-order="0">
+        <a class="photo" href="https://hipobuyfind.com" aria-label="Explore Black and Red Basketball Sneakers at HipobuyFind">
+          <img src="https://si.geilicdn.com/open1623462477-1234478995-000d00000194e28adce90aa08290_1000_1000.jpg" alt="Black and red basketball sneakers from the source catalog" width="600" height="600" loading="lazy" decoding="async">
+          <span class="image-error">Photo unavailable · visit source catalog</span><span class="badge">COURT &amp; CASUAL</span>
+        </a>
+        <div class="product-body">
+          <div class="meta"><span>Shoes</span><span>Item 149969</span></div>
+          <h3>Black and Red Basketball Sneakers</h3>
+          <div class="price-row"><div class="price">¥145.00<small>Source reference · CNY</small></div><a class="open" href="https://hipobuyfind.com">Explore catalog ↗</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-category="shoes" data-price="350" data-order="1">
+        <a class="photo" href="https://hipobuyfind.com" aria-label="Explore Cream Chunky Sneakers at HipobuyFind">
+          <img src="https://si.geilicdn.com/open1700230128-1234478995-64a0000001987b40d1cb0a8115c2_1080_1440.jpg" alt="Cream chunky sneakers with wide laces from the source catalog" width="600" height="600" loading="lazy" decoding="async">
+          <span class="image-error">Photo unavailable · visit source catalog</span><span class="badge">NEUTRAL ROTATION</span>
+        </a>
+        <div class="product-body">
+          <div class="meta"><span>Shoes</span><span>Item 148191</span></div>
+          <h3>Cream Chunky Sneakers with Wide Laces</h3>
+          <div class="price-row"><div class="price">¥350.00<small>Source reference · CNY</small></div><a class="open" href="https://hipobuyfind.com">Explore catalog ↗</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-category="clothing" data-price="230" data-order="2">
+        <a class="photo" href="https://hipobuyfind.com" aria-label="Explore the oversized hoodie at HipobuyFind">
+          <img src="https://si.geilicdn.com/open1806012509-1234478995-6c270000019717ac043f0a23b491_800_800.jpg" alt="Fear of God Essentials oversized hoodie, source listing named Seafam" width="600" height="600" loading="lazy" decoding="async">
+          <span class="image-error">Photo unavailable · visit source catalog</span><span class="badge">RELAXED LAYERS</span>
+        </a>
+        <div class="product-body">
+          <div class="meta"><span>Hoodies / Sweaters</span><span>Item 154948</span></div>
+          <h3>Fear of God Essentials Oversized Hoodie Seafam</h3>
+          <div class="price-row"><div class="price">¥230.00<small>Source reference · CNY</small></div><a class="open" href="https://hipobuyfind.com">Explore catalog ↗</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-category="clothing" data-price="210" data-order="3">
+        <a class="photo" href="https://hipobuyfind.com" aria-label="Explore the Essentials hoodie at HipobuyFind">
+          <img src="https://si.geilicdn.com/pcitem901956541713-2b63000001971aeb92a50a23038e_1600_1600.jpg" alt="Fear of God Essentials hoodie source catalog photo" width="600" height="600" loading="lazy" decoding="async">
+          <span class="image-error">Photo unavailable · visit source catalog</span><span class="badge">EVERYDAY LAYER</span>
+        </a>
+        <div class="product-body">
+          <div class="meta"><span>Hoodies / Sweaters</span><span>Item 154946</span></div>
+          <h3>Fear of God Essentials Hoodie</h3>
+          <div class="price-row"><div class="price">¥210.00<small>Source reference · CNY</small></div><a class="open" href="https://hipobuyfind.com">Explore catalog ↗</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-category="clothing" data-price="168" data-order="4">
+        <a class="photo" href="https://hipobuyfind.com" aria-label="Explore the Trapstar T-Shirt at HipobuyFind">
+          <img src="https://si.geilicdn.com/open1806012509-1234478995-7ec4000001971084be030a22d249_1920_1920.jpg" alt="Trapstar T-shirt source catalog photo" width="600" height="600" loading="lazy" decoding="async">
+          <span class="image-error">Photo unavailable · visit source catalog</span><span class="badge">OFF-DUTY EDIT</span>
+        </a>
+        <div class="product-body">
+          <div class="meta"><span>T-Shirts</span><span>Item 154957</span></div>
+          <h3>Trapstar T-Shirt</h3>
+          <div class="price-row"><div class="price">¥168.00<small>Source reference · CNY</small></div><a class="open" href="https://hipobuyfind.com">Explore catalog ↗</a></div>
+        </div>
+      </article>
+
+      <article class="product" data-category="bags" data-price="340" data-order="5">
+        <a class="photo" href="https://hipobuyfind.com" aria-label="Explore the beige mini backpack at HipobuyFind">
+          <img src="https://si.geilicdn.com/pcitem901921648802-7dbe000001955a1df4c10a210349_1080_1080.jpg" alt="Beige quilted drawstring mini backpack, style 6302-1" width="600" height="600" loading="lazy" decoding="async">
+          <span class="image-error">Photo unavailable · visit source catalog</span><span class="badge">SMALL ESSENTIALS</span>
+        </a>
+        <div class="product-body">
+          <div class="meta"><span>Bags</span><span>Item 154850</span></div>
+          <h3>Beige Quilted Drawstring Mini Backpack, Style 6302-1</h3>
+          <div class="price-row"><div class="price">¥340.00<small>Source reference · CNY</small></div><a class="open" href="https://hipobuyfind.com">Explore catalog ↗</a></div>
+        </div>
+      </article>
+    </div>
+    <p id="empty" class="empty" hidden>No matching finds. Try another name, item ID or category.</p>
+    <p class="catalog-foot">These six entries are a static import, not a live inventory feed. Prices and availability may change. All product links open the HipobuyFind homepage; use the displayed item ID to identify the entry there. Shipping, fees and taxes are excluded.</p>
+    <noscript><p class="fine">All six entries remain available without JavaScript. Search, sorting and the planning calculator require JavaScript.</p></noscript>
+  </section>
+
+  <section class="guide" aria-label="Buying guide and budget planner">
+    <div class="panel">
+      <div class="kicker">From discovery to decision / 02</div>
+      <h2>How to use a JoyaGoo spreadsheet</h2>
+      <p class="subtext">Treat a spreadsheet as a shortlist. The current listing and your selected options determine what you actually order.</p>
+      <ol class="steps">
+        <li><strong>Find the original listing</strong><p>Open the catalog, locate the item and keep its original marketplace address. A catalog item ID may differ from the seller’s marketplace product ID.</p></li>
+        <li><strong>Check the exact variation</strong><p>Compare measurements, material notes, colour and included pieces. Measure a similar item you already own instead of relying only on a size letter.</p></li>
+        <li><strong>Verify agent availability</strong><p>If you intend to use JoyaGoo, check whether it accepts the original listing and the item category before paying. This page does not verify agent compatibility.</p></li>
+        <li><strong>Review before international delivery</strong><p>Where inspection photos are available, compare the received item with your order notes. Confirm return deadlines and the final delivery quote before dispatch.</p></li>
+      </ol>
+    </div>
+
+    <div class="panel budget">
+      <div class="kicker">Plan the whole order / 03</div>
+      <h2>A clearer spending estimate</h2>
+      <p class="subtext">Enter your own estimates in one currency. This adds the amounts you provide; it does not retrieve rates, shipping quotes or tax calculations.</p>
+      <div class="fields">
+        <label>Items<input id="cost-items" type="number" min="0" step="0.01" value="0" inputmode="decimal"></label>
+        <label>Domestic shipping<input id="cost-domestic" type="number" min="0" step="0.01" value="0" inputmode="decimal"></label>
+        <label>International shipping<input id="cost-shipping" type="number" min="0" step="0.01" value="0" inputmode="decimal"></label>
+        <label>Fees and taxes<input id="cost-fees" type="number" min="0" step="0.01" value="0" inputmode="decimal"></label>
+      </div>
+      <div class="total"><span>Your planning total</span><output id="total" aria-live="polite">0.00</output></div>
+      <p class="fine">Total is in the currency you entered. Add any payment conversion charge to your fees estimate. A missing cost remains outside this estimate.</p>
+      <p class="fine">For a useful shipping comparison, keep the destination, parcel dimensions, estimated weight and delivery service consistent.</p>
+    </div>
+  </section>
+
+  <section class="explain" aria-labelledby="evidence-title">
+    <div class="kicker">Know what you are comparing</div>
+    <h2 id="evidence-title">Photos, prices and QC answer different questions.</h2>
+    <p>A JoyaGoo spreadsheet helps organize product discovery. A seller photo shows how an item is presented; an inspection photo shows a particular received item. Neither automatically proves material quality, durability or authenticity.</p>
+    <div class="checks">
+      <div><h3>Listing evidence</h3><p>Save the original URL, seller name and chosen variation. Check whether the advertised price applies to your size and colour.</p></div>
+      <div><h3>Inspection evidence</h3><p>Look for the correct quantity, measurements and visible defects. Ask for closer photos when an important detail is unclear.</p></div>
+      <div><h3>Order evidence</h3><p>Keep the quoted costs, return conditions and order reference together. Check restrictions for the destination and shipping service.</p></div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="kicker">Useful answers / 04</div>
+    <h2 id="faq-title">JoyaGoo spreadsheet questions</h2>
+    <details open><summary>What is a JoyaGoo spreadsheet?</summary><p>It is a product discovery list used to organize finds and listing references for shoppers researching JoyaGoo. This page adds a small HipobuyFind catalog selection and a buying checklist. It does not sell or ship the products.</p></details>
+    <details><summary>Where do the buttons take me?</summary><p>The “JoyaGoo spreadsheet” and “Buy it now” buttons both open https://hipobuyfind.com. They do not open a JoyaGoo checkout or add a product to a cart.</p></details>
+    <details><summary>Are these real catalog products?</summary><p>The displayed names, source photos, item IDs and CNY reference prices were taken from the HipobuyFind catalog snapshot dated November 19, 2026. Stock, authenticity, quality and successful fulfillment have not been independently verified.</p></details>
+    <details><summary>Can I order every entry through JoyaGoo?</summary><p>Compatibility has not been verified. Locate the original marketplace listing and check it through the agent you intend to use. Confirm the correct variation and any purchasing restrictions before paying.</p></details>
+    <details><summary>Does the displayed price include delivery?</summary><p>No. It is a source catalog reference for the item. Domestic transport, international delivery, service charges, payment conversion and applicable taxes may add to your total.</p></details>
+    <details><summary>What should I do if a spreadsheet link stops working?</summary><p>Check whether you saved the original marketplace URL and product ID. Search the current catalog or ask the seller for the current listing. Avoid changing an unfamiliar link pattern and assuming it points to the same item.</p></details>
+    <details><summary>Is this the official JoyaGoo website?</summary><p>No. This is an independent discovery and planning page. JoyaGoo and other names belong to their respective owners. No official relationship is claimed.</p></details>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-title">
+    <div class="eyebrow">Build a better shortlist</div>
+    <h2 id="cta-title">Explore the full source catalog.</h2>
+    <p>Keep your item IDs, compare the details and confirm current prices before ordering.</p>
+    <div class="actions" style="justify-content:center">
+      <a class="btn light" href="https://hipobuyfind.com">JoyaGoo spreadsheet ↗</a>
+      <a class="btn outline" href="https://hipobuyfind.com">Buy it now ↗</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <div><strong>JoyaGoo spreadsheet · Independent discovery guide</strong><p>Catalog source: <a href="https://hipobuyfind.com">HipobuyFind</a>. Product images remain the property of their respective owners. Source listing names are provided for identification; no authenticity certification or brand affiliation is implied.</p></div>
+    <div>Catalog snapshot<br><time datetime="2026-11-19">November 19, 2026</time></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  const search=document.getElementById("search");
+  const sort=document.getElementById("sort");
+  const grid=document.getElementById("products");
+  const cards=Array.from(grid.querySelectorAll(".product"));
+  const filters=Array.from(document.querySelectorAll(".filter"));
+  let category="all";
+
+  function update(){
+    const query=search.value.trim().toLowerCase();
+    let visible=0;
+    const ordered=cards.slice().sort(function(a,b){
+      if(sort.value==="low")return Number(a.dataset.price)-Number(b.dataset.price);
+      if(sort.value==="high")return Number(b.dataset.price)-Number(a.dataset.price);
+      return Number(a.dataset.order)-Number(b.dataset.order);
+    });
+    ordered.forEach(function(card){
+      const matches=(category==="all"||card.dataset.category===category)&&card.textContent.toLowerCase().includes(query);
+      card.hidden=!matches;
+      if(matches)visible++;
+      grid.appendChild(card);
+    });
+    document.getElementById("results").textContent=visible+" of "+cards.length+" source catalog entries · CNY reference prices";
+    document.getElementById("empty").hidden=visible!==0;
+  }
+
+  filters.forEach(function(button){
+    button.addEventListener("click",function(){
+      category=button.dataset.category;
+      filters.forEach(function(item){item.setAttribute("aria-pressed",String(item===button));});
+      update();
+    });
+  });
+  search.addEventListener("input",update);
+  sort.addEventListener("change",update);
+
+  const costs=Array.from(document.querySelectorAll(".fields input"));
+  function calculate(){
+    const total=costs.reduce(function(sum,field){
+      const value=Number.parseFloat(field.value);
+      return sum+(Number.isFinite(value)?Math.max(0,value):0);
+    },0);
+    document.getElementById("total").textContent=total.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+  costs.forEach(function(field){field.addEventListener("input",calculate);});
+
+  document.querySelectorAll(".photo img").forEach(function(img){
+    function fallback(){
+      img.hidden=true;
+      img.style.display="none";
+      const message=img.parentElement.querySelector(".image-error");
+      if(message)message.style.display="grid";
+    }
+    img.addEventListener("error",fallback);
+    if(img.complete&&img.naturalWidth===0)fallback();
+  });
+  calculate();
+})();
+</script>
+</body>
+</html>
